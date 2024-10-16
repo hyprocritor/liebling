@@ -168,4 +168,5 @@ $(() => {
 
 $(window).on('load', () => {
   prepareProgressCircle();
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
 });

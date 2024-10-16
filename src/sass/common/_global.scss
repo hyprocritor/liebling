@@ -1,14 +1,17 @@
 /** Global styles */
 
+html {
+  font-size: 82.5%;
+}
+
 body {
+  font: 400 1em / 1.5em "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   display: flex;
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
   color: var(--primary-foreground-color);
   font-size: 1rem;
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  font-display: swap;
   overflow-x: hidden;
   background-color: var(--background-color);
   padding-top: var(--announcement-bar-height);
