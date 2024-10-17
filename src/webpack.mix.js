@@ -26,6 +26,7 @@ mix
   })
   .browserSync({
     proxy: 'localhost:2368',
+    cors: true,
     files: [
       '../assets/js/**/*.js',
       '../assets/css/**/*.css',

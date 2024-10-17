@@ -396,7 +396,7 @@
     background: 0 0;
     text-shadow: 0 1px #fff;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 1em;
+    font-size: 1rem;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
@@ -558,7 +558,7 @@
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA5IDUiPgogICAgPHBhdGggZmlsbD0iIzU2NWU2MCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOC4zMi41N2EuMjQ3LjI0NyAwIDAgMSAwIC4zNkw0LjY4IDQuNTdhLjI0Ny4yNDcgMCAwIDEtLjM2IDBMLjY4LjkzYS4yNDcuMjQ3IDAgMCAxIDAtLjM2bC4zOS0uMzlhLjI0Ny4yNDcgMCAwIDEgLjM2IDBMNC41IDMuMjUgNy41Ny4xOGEuMjQ3LjI0NyAwIDAgMSAuMzYgMGwuMzkuMzl6Ii8+Cjwvc3ZnPgo=");
   }
 
-  button:not(.m-icon-button):not(.kg-video-card button):not(.kg-audio-card button):not(.kg-toggle-card button) {
+  button:not(.m-icon-button):not(.kg-video-card button):not(.kg-audio-card button):not(.kg-toggle-card button):not(.copy-to-clipboard-button ){
     @extend .m-button;
 
     &:not(.primary) {

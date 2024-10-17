@@ -4,13 +4,15 @@ This template is used for the post page.
 
 {{!-- This block preloads specific assets for the post page --}}
 {{#contentFor "preload"}}
-  <link rel="preload" href="{{asset "css/post.css"}}" as="style" />
-  <link rel="preload" href="{{asset "js/post.js"}}" as="script" />
+  <link rel="preload" href="{{asset "css/post.css"}}" as="style"/>
+  <link rel="preload" href="{{asset "js/post.js"}}" as="script"/>
+
 {{/contentFor}}
 
 {{!-- This block loads specific styles for the post page --}}
 {{#contentFor "styles"}}
-  <link rel="stylesheet" type="text/css" href="{{asset "css/post.css"}}" media="screen" />
+  <link rel="stylesheet" type="text/css" href="{{asset "css/post.css"}}" media="screen"/>
+
 {{/contentFor}}
 
 {{!-- The tag below means: insert everything in this file
@@ -24,7 +26,7 @@ into the {body} of the default.hbs template --}}
 
 <main class="main-wrap">
   {{#post}}
-    {{!-- Inject styles of the hero image to make it responsive --}}
+  {{!-- Inject styles of the hero image to make it responsive --}}
     {{> hero background=feature_image}}
     </section>
     {{#if feature_image}}
@@ -39,12 +41,16 @@ into the {body} of the default.hbs template --}}
   {{/post}}
 
   <article>
-    <div class="l-content in-post han-init-context">
+    <div class="l-content in-post">
       {{!-- Everything inside the #post tags pulls data from the post --}}
       {{#post}}
-        <div class="l-wrapper in-post {{#unless feature_image}}no-image{{/unless}} js-animation-wrapper" data-animate="fade-up">
+        <div class="l-wrapper in-post {{#unless feature_image}}no-image{{/unless}} js-animation-wrapper "
+             data-animate="fade-up">
           <div
-            class="l-post-content js-progress-content">
+            class="l-post-content js-progress-content han-init-context ">
+            <aside class="gh-sidebar">
+              <div class="gh-toc"></div>
+            </aside>
             <header class="m-heading">
               <h1 class="m-heading__title in-post">{{title}}</h1>
               <div class="m-heading__meta">
@@ -55,26 +61,31 @@ into the {body} of the default.hbs template --}}
                 <span class="m-heading__meta__time">{{date published_at format="YYYY 年 MM 月 DD 日 HH:mm"}}</span>
               </div>
             </header>
-            <div class="pos-relative js-post-content">
+
               <div class="m-share">
                 <div class="m-share__content js-sticky">
-<!--                  <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute='true'}}"-->
-<!--                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">-->
-<!--                    <span class="icon-facebook" aria-hidden="true"></span>-->
-<!--                  </a>-->
-<!--                  <a href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url absolute='true'}}"-->
-<!--                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">-->
-<!--                    <span class="icon-twitter" aria-hidden="true"></span>-->
-<!--                  </a>-->
-                  <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="{{t "Scroll to top"}}">
+                  <!--                  <a href="https://www.facebook.com/sharer/sharer.php?u={{url
+                    absolute='true'}}"-->
+                  <!--                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">-->
+                  <!--                    <span class="icon-facebook" aria-hidden="true"></span>-->
+                  <!--                  </a>-->
+                  <!--                  <a href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url
+                    absolute='true'}}"-->
+                  <!--                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">-->
+                  <!--                    <span class="icon-twitter" aria-hidden="true"></span>-->
+                  <!--                  </a>-->
+                  <button class="m-icon-button filled in-share progress js-scrolltop"
+                          aria-label="{{t "Scroll to top"}}">
                     <span class="icon-arrow-top" aria-hidden="true"></span>
                     <svg aria-hidden="true">
-                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0" />
+                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0"/>
                     </svg>
                   </button>
                 </div>
               </div>
+            <div class="gh-post">
               {{content}}
+            </div>
               {{!-- List of tags  --}}
               {{#if tags}}
                 <section class="m-tags in-post">
@@ -91,24 +102,8 @@ into the {body} of the default.hbs template --}}
             </div>
           </div>
         </div>
+
         {{!-- Email subscribe form at the bottom of the page --}}
-        {{#if @site.members_enabled}}
-          <section class="m-subscribe-section js-newsletter">
-            <div class="l-wrapper in-post">
-              <div class="m-subscribe-section__content">
-                <div class="m-subscribe-section__text">
-                  <h4 class="m-subscribe-section__title">{{t "Subscribe to our newsletter"}}</h4>
-                  <p class="m-subscribe-section__description">
-                    {{t "Get the latest posts delivered right to your inbox."}}
-                  </p>
-                </div>
-                <div class="m-subscribe-section__form">
-                  {{> "newsletter-form"}}
-                </div>
-              </div>
-            </div>
-          </section>
-        {{/if}}
         <section class="m-author">
           <div class="m-author__content">
             <div class="m-author__picture">
@@ -142,14 +137,16 @@ into the {body} of the default.hbs template --}}
                 {{/if}}
                 {{#if primary_author.facebook}}
                   <li>
-                    <a href="https://facebook.com/{{primary_author.facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
+                    <a href="https://facebook.com/{{primary_author.facebook}}" target="_blank" rel="noopener"
+                       aria-label="Facebook">
                       <span class="icon-facebook" aria-hidden="true"></span>
                     </a>
                   </li>
                 {{/if}}
                 {{#if primary_author.twitter}}
                   <li>
-                    <a href="https://twitter.com/{{primary_author.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
+                    <a href="https://twitter.com/{{primary_author.twitter}}" target="_blank" rel="noopener"
+                       aria-label="Twitter">
                       <span class="icon-twitter" aria-hidden="true"></span>
                     </a>
                   </li>
@@ -167,22 +164,36 @@ into the {body} of the default.hbs template --}}
           </div>
         {{/if}}
         {{!-- Third-party comments --}}
+        <section class="m-comments">
+          <div class="l-wrapper in-comments js-third-party-comments">
+            <!-- CSS -->
+            <!-- Artalk -->
+            <div id="Comments"></div>
 
-          <section class="m-comments">
-            <div class="l-wrapper in-comments js-third-party-comments">
-              <!-- CSS -->
-
-
-              <!-- Artalk -->
-              <div id="Comments"></div>
-
+          </div>
+        </section>
+        {{#if @site.members_enabled}}
+          <section class="m-subscribe-section js-newsletter">
+            <div class="l-wrapper in-post">
+              <div class="m-subscribe-section__content">
+                <div class="m-subscribe-section__text">
+                  <h4 class="m-subscribe-section__title">{{t "Subscribe to our newsletter"}}</h4>
+                  <p class="m-subscribe-section__description">
+                    {{t "Get the latest posts delivered right to your inbox."}}
+                  </p>
+                </div>
+                <div class="m-subscribe-section__form">
+                  {{> "newsletter-form"}}
+                </div>
+              </div>
             </div>
           </section>
-
+        {{/if}}
       {{/post}}
       {{!-- Related posts --}}
       {{#if post.tags.length}}
-        {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors" order="published_at desc" as |related|}}
+        {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors"
+               order="published_at desc" as |related|}}
           {{#if related}}
             <section class="m-recommended">
               <div class="l-wrapper in-recommended">
@@ -193,10 +204,12 @@ into the {body} of the default.hbs template --}}
                       {{!-- The tag below iterates over all the related posts --}}
                       {{> "loop"}}
                     </div>
-                    <button class="m-icon-button filled in-recommended-articles swiper-button-prev" aria-label="{{t "Previous"}}">
+                    <button class="m-icon-button filled in-recommended-articles swiper-button-prev"
+                            aria-label="{{t "Previous"}}">
                       <span class="icon-arrow-left" aria-hidden="true"></span>
                     </button>
-                    <button class="m-icon-button filled in-recommended-articles swiper-button-next" aria-label="{{t "Next"}}">
+                    <button class="m-icon-button filled in-recommended-articles swiper-button-next"
+                            aria-label="{{t "Next"}}">
                       <span class="icon-arrow-right" aria-hidden="true"></span>
                     </button>
                   </div>
@@ -213,16 +226,39 @@ into the {body} of the default.hbs template --}}
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
   <script defer src="{{asset "js/post.js"}}"></script>
-  <link href="http://100.125.242.49:23366/dist/Artalk.css" rel="stylesheet" />
+
+
+  <link href="https://comments.23h.at/dist/Artalk.css" rel="stylesheet"/>
   <!-- JS -->
-  <script src="http://100.125.242.49:23366/dist/Artalk.js"></script>
+  <script src="https://comments.23h.at/dist/Artalk.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.3/tocbot.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-st608h+ZqzliahyzEpETxzU0f7z7a9acN6AFvYmHvpFhmcFuKT8a22TT5TpKpjDa3pt3Wv7Z3SdQBCBdDPhyWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-/kVH1uXuObC0iYgxxCKY41JdWOkKOxorFVmip+YVifKsJ4Au/87EisD1wty7vxN2kAhnWh6Yc8o/dSAXj6Oz7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.gh-toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: '.gh-post',
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: 'h1, h2, h3, h4',
+      // Ensure correct positioning
+      hasInnerContainers: true,
+      //disable smooth scroll due to wrong position
+      scrollSmooth: false,
+      disableTocScrollSync: false,
+    });
+  </script>
   <script>
     Artalk.init({
-      el:        '#Comments',                       // 绑定元素的 Selector
-      pageKey:   location.pathname,                         // 固定链接
+      el: '#Comments',                       // 绑定元素的 Selector
+      pageKey: location.pathname,                         // 固定链接
       pageTitle: location.pathname,         // 页面标题 (留空自动获取)
-      server:    'http://100.125.242.49:23366/',  // 后端地址
-      site:      '在二十三时',                    // 你的站点名
+      server: 'https://comments.23h.at/',  // 后端地址
+      site: '在二十三时',                    // 你的站点名
     })
   </script>
 {{/contentFor}}

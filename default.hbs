@@ -11,13 +11,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{!-- Preload assets --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-Dqf5696xtofgH089BgZJo2lSWTvev4GFo+gA2o4GullFY65rzQVQLQVlzLvYwTo0Bb2Gpb6IqwxYWtoMonfdhQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preload" href="{{asset "css/app.css"}}" as="style" />
     <link rel="preload" href="{{asset "js/manifest.js"}}" as="script" />
     <link rel="preload" href="{{asset "js/vendor.js"}}" as="script" />
     <link rel="preload" href="{{asset "js/app.js"}}" as="script" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.3/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ms-cursor@1.2.0/style.min.css"/>
     {{!-- This #block helper will try to preload page-specific assets --}}
     {{{block "preload"}}}
+    <style>
+      .gh-content {
+        position: relative;
+      }
+      .gh-toc > .toc-list {
+        position: relative;
+        font-size: medium;
+      }
+      .toc-list {
+        overflow: hidden;
+        list-style: none;
+      }
+      @media (min-width: 1300px) {
+        .gh-sidebar {
+          position: absolute;
+          top: 12em;
+          bottom: 0;
+          margin-top: 6vmin;
+          left: -300px;
+          width: 400px;
+          grid-column-start: auto;
+        }
+
+        .gh-toc {
+          position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
+          top: 6vmin;
+        }
+      }
+      .gh-toc .is-active-link::before {
+        background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+      }
+      a.toc-link {
+        text-decoration: none;
+        font-size: medium;
+      }
+    </style>
 
     {{!-- Styles & Scripts --}}
     <style>
@@ -97,10 +137,8 @@
     </script>
     <link rel="stylesheet" media="all" href="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     {{#if @custom.enable_native_search}}
       <script>
         const nativeSearchEnabled = true
@@ -135,7 +173,7 @@
       }
     </script>
   </head>
-  <body class="{{body_class}}">
+  <body class="{{body_class}} line-numbers ">
     {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
     {{{body}}}
 
@@ -151,8 +189,9 @@
     <script defer src="{{asset "js/manifest.js"}}"></script>
     <script defer src="{{asset "js/vendor.js"}}"></script>
     <script defer src="{{asset "js/app.js"}}"></script>
+    <script  src="{{asset "js/mouse.js"}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     {{!-- The #block helper will pull in data from the #contentFor other template files --}}
     {{{block "scripts"}}}

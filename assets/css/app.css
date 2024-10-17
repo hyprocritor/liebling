@@ -840,6 +840,7 @@ textarea,
 /** Global styles */
 html {
   font-size: 82.5%;
+  cursor: none;
 }
 
 body {
@@ -1003,11 +1004,6 @@ fieldset {
     padding: 0;
   }
 }
-@media only screen and (min-width: 48rem) {
-  .l-wrapper.in-post {
-    max-width: 960px;
-  }
-}
 .l-wrapper.in-comments {
   color: var(--primary-foreground-color);
 }
@@ -1043,7 +1039,6 @@ fieldset {
 
 .l-content {
   padding: 40px 0 20px;
-  line-height: 1.7;
 }
 @media only screen and (min-width: 48rem) {
   .l-content {
@@ -1127,6 +1122,19 @@ fieldset {
   100% {
     transform: translatex(0);
   }
+}
+
+.copy-to-clipboard-button {
+  padding: 4px !important;
+  box-shadow: none !important;
+}
+.copy-to-clipboard-button > span {
+  font-size: 1rem;
+}
+
+div.code-toolbar > .toolbar {
+  opacity: 100 !important;
+  transition: none !important;
 }
 
 .m-icon-button {

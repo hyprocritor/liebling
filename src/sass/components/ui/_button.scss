@@ -74,3 +74,16 @@
     }
   }
 }
+.copy-to-clipboard-button {
+    padding: 4px !important;
+    box-shadow: none !important;
+   &>span {
+     font-size: 1rem;
+   }
+}
+div.code-toolbar {
+  &>.toolbar {
+    opacity: 100 !important;
+    transition: none !important;
+  }
+}
