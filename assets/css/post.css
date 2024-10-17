@@ -186,14 +186,12 @@
   letter-spacing: 0.2px;
   line-height: 1.5em;
   font-size: 1.125rem;
-  margin-bottom: 2em;
 }
 @media only screen and (min-width: 48rem) {
   .l-post-content p {
     letter-spacing: 0.3px;
     line-height: 2em;
     font-size: 1.25rem;
-    margin-bottom: 1.25rem;
   }
 }
 .l-post-content p img {
@@ -518,6 +516,7 @@
 }
 .l-post-content :not(pre) > code {
   padding: 0.1em;
+  font-size: 1em;
   border-radius: 0.3em;
   white-space: normal;
 }
