@@ -254,12 +254,13 @@ into the {body} of the default.hbs template --}}
     });
   </script>
   <script>
-    Artalk.init({
+    let artalk = Artalk.init({
       el: '#Comments',                       // 绑定元素的 Selector
       pageKey: location.pathname,                         // 固定链接
       pageTitle: location.pathname,         // 页面标题 (留空自动获取)
       server: 'https://comments.23h.at/',  // 后端地址
       site: '在二十三时',                    // 你的站点名
+      darkMode: localStorage.getItem("theme") === "dark"
     })
   </script>
 {{/contentFor}}

@@ -5,9 +5,10 @@ import 'tippy.js/dist/tippy.css';
 import shave from 'shave';
 import GhostContentAPI from '@tryghost/content-api';
 import Fuse from 'fuse.js/dist/fuse.basic.esm.min.js';
-import Swiper, { FreeMode, A11y } from 'swiper';
+import Swiper, {FreeMode, A11y} from 'swiper';
 import 'swiper/css';
-import { isRTL, formatDate, isMobile } from './helpers';
+import {isRTL, formatDate, isMobile} from './helpers';
+
 
 $(() => {
   if (isRTL()) {
@@ -176,8 +177,8 @@ $(() => {
             <a href="${bestResults[i].item.url}" class="m-result__link">\
               <h3 class="m-result__title">${bestResults[i].item.title}</h3>\
               <span class="m-result__date">${formatDate(
-                bestResults[i].item.published_at
-              )}</span>\
+            bestResults[i].item.published_at
+          )}</span>\
             </a>\
           </article>`;
         }
@@ -201,11 +202,17 @@ $(() => {
     if ($toggleDarkMode.is(':checked')) {
       $('html').attr('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
+      if (artalk !== undefined) {
+        artalk.setDarkMode(true)
+      }
     } else {
       $('html').attr('data-theme', 'light');
       localStorage.setItem('theme', 'light');
-    }
 
+      if (artalk !== undefined) {
+        artalk.setDarkMode(false)
+      }
+    }
     if ($nativeComments) {
       $nativeComments.contentDocument.location.reload(true);
     }
@@ -236,7 +243,7 @@ $(() => {
 
   if (currentSavedTheme) {
     if (currentSavedTheme === 'dark') {
-      $toggleDarkMode.each(function() {
+      $toggleDarkMode.each(function () {
         $(this).attr('checked', true);
       });
     }
@@ -291,7 +298,7 @@ $(() => {
       })
     });
 
-    barMutationObserver.observe($announcementBar[0], { childList: true });
+    barMutationObserver.observe($announcementBar[0], {childList: true});
     barResizeObserver.observe($announcementBar[0]);
   } else {
     setTimeout(() => {
@@ -306,7 +313,7 @@ $(() => {
       slidesPerView: 'auto',
       a11y: true,
       on: {
-        init: function() {
+        init: function () {
           shave('.js-recent-article-title', 50);
         }
       }
@@ -332,7 +339,7 @@ $(() => {
     });
   }
 
-  tippy('.js-tooltip', { allowHTML: true });
+  tippy('.js-tooltip', {allowHTML: true});
 
   shave('.js-article-card-title', 100);
   shave('.js-article-card-title-no-image', 250);
