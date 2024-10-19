@@ -6,7 +6,11 @@
   z-index: 4;
   will-change: transform;
   background-color: var(--background-color);
-  @include transition(transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1));
+
+
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
 
   @include respond-to('medium') {
     padding: 15px 0;

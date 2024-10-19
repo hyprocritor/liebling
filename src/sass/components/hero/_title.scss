@@ -1,5 +1,10 @@
 .m-hero-title {
-  color: var(--titles-color);
+  background: radial-gradient(circle, #80ffc1 0%, #ff6161 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: animatedGradient 2s infinite ease;
+  animation-direction: alternate;
   letter-spacing: 0.4px;
   line-height: 1.3;
   font-size: 1.750rem;
@@ -8,7 +13,7 @@
 
   @include respond-to('medium') {
     letter-spacing: 0.5px;
-    font-size: 2.250rem;
+    font-size: 3.250rem;
   }
 
   &.bigger {
@@ -20,5 +25,14 @@
       font-size: 3.250rem;
       margin-bottom: 10px;
     }
+  }
+}
+@keyframes animatedGradient {
+  from {
+    background-size: 100%;
+  }
+
+  to {
+    background-size: 250%;
   }
 }

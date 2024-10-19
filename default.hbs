@@ -1,196 +1,522 @@
 <!DOCTYPE html>
 <html lang="{{@site.locale}}">
-  <head>
-    {{!-- Document Settings --}}
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+  {{!-- Document Settings --}}
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-    {{!-- Base Meta --}}
-    <title>{{meta_title}}</title>
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{!-- Base Meta --}}
+  <title>{{meta_title}}</title>
+  <meta name="HandheldFriendly" content="True"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  {{!-- Preload assets --}}
+  <link rel="preload" href="{{asset "css/app.css"}}" as="style"/>
+  <link rel="preload" href="{{asset "js/manifest.js"}}" as="script"/>
+  <link rel="preload" href="{{asset "js/vendor.js"}}" as="script"/>
+  <link rel="preload" href="{{asset "js/app.js"}}" as="script"/>
+  <style>
+    pre[class*=language-].line-numbers {
+      position: relative;
+      padding-left: 3.8em;
+      counter-reset: linenumber
+    }
 
-    {{!-- Preload assets --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-Dqf5696xtofgH089BgZJo2lSWTvev4GFo+gA2o4GullFY65rzQVQLQVlzLvYwTo0Bb2Gpb6IqwxYWtoMonfdhQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preload" href="{{asset "css/app.css"}}" as="style" />
-    <link rel="preload" href="{{asset "js/manifest.js"}}" as="script" />
-    <link rel="preload" href="{{asset "js/vendor.js"}}" as="script" />
-    <link rel="preload" href="{{asset "js/app.js"}}" as="script" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.3/tocbot.css">
-    {{!-- This #block helper will try to preload page-specific assets --}}
-    {{{block "preload"}}}
-    <style>
-      .gh-content {
-        position: relative;
+    pre[class*=language-].line-numbers > code {
+      position: relative;
+      white-space: inherit
+    }
+
+    .line-numbers .line-numbers-rows {
+      position: absolute;
+      pointer-events: none;
+      top: 0;
+      font-size: 100%;
+      left: -3.8em;
+      width: 3em;
+      letter-spacing: -1px;
+      border-right: 1px solid #999;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .line-numbers-rows > span {
+      display: block;
+      counter-increment: linenumber
+    }
+
+    .line-numbers-rows > span:before {
+      content: counter(linenumber);
+      color: #999;
+      display: block;
+      padding-right: .8em;
+      text-align: right
+    }
+  </style>
+  <style>
+    /* PrismJS - used for code highlighting */
+
+    [class*="language-"] ::selection {
+      color: #000;
+      text-shadow: none;
+    }
+
+    .token.important,
+    .token.bold {
+      font-weight: bold;
+    }
+
+    .token.italic {
+      font-style: italic;
+    }
+
+    .token.entity {
+      cursor: help;
+    }
+
+    .namespace {
+      opacity: 0.7;
+    }
+
+    /* Default colors (Light mode) */
+    :not(pre) > code[class*="language-"],
+    pre[class*="language-"] {
+      --color: #33a;
+      --textShadow: #fff;
+      --comment: #6e6e6e;
+      --punctuation: #4e4e4e;
+      --property: #905;
+      --operator: #70b;
+      --selector: #487b00;
+      --url: #8d6640;
+      --urlBg: hsla(0, 0%, 100%, .5);
+      --boolean: #905;
+      --atrule: #0075a8;
+      --keyword: #0075a8;
+      --function: #c93654;
+      --regex: #860;
+      --boxShadow: hsla(0, 0%, 0%, .3);
+      --prism-background: #f5f2f0;
+
+    }
+
+
+    /* If the OS has dark mode set then... */
+    /* Change dark to light to test */
+
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) code[class*="language-"]:not([contenteditable]),
+      html:not([data-theme="light"]) pre[class*="language-"] {
+        --color: #6ae;
+        --textShadow: #000;
+        --comment: #9ab;
+        --punctuation: #999;
+        --property: #e70;
+        --operator: #d7f;
+        --selector: #8b2;
+        --url: #cde;
+        --urlBg: rgba(0, 0, 0, .5);
+        --boolean: #a8f;
+        --atrule: #f00;
+        --keyword: #f00;
+        --function: #f55;
+        --regex: #f91;
+
+        --boxShadow: #000;
+        --prism-background: #f5f2f0;
       }
-      .gh-toc > .toc-list {
-        position: relative;
-        font-size: medium;
+    }
+
+
+    /* Manual switch mode - where implemented */
+    html[data-theme="dark"] code[class*="language-"]:not([contenteditable]),
+    html[data-theme="dark"] pre[class*="language-"] {
+
+      /* Exactly the same as prefers-color-scheme: dark */
+      --color: #6ae;
+      --textShadow: #000;
+      --comment: #9ab;
+      --punctuation: #999;
+      --property: #e70;
+      --operator: #d7f;
+      --selector: #8b2;
+      --url: #cde;
+      --urlBg: rgba(0, 0, 0, .5);
+      --boolean: #8af;
+      --atrule: #ffb;
+      --keyword: #fe6;
+      --function: #f55;
+      --regex: #f91;
+      --prism-background: #2a2a2a;
+      --boxShadow: #000;
+
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: var(--comment);
+    }
+
+    .token.punctuation {
+      color: var(--punctuation);
+    }
+
+    .token.property,
+    .token.symbol,
+    .token.tag,
+    .token.constant,
+    .token.deleted {
+      color: var(--property);
+    }
+
+    .token.boolean,
+    .token.number {
+      color: var(--boolean);
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: var(--selector);
+    }
+
+    .token.operator {
+      color: var(--operator);
+    }
+
+    .token.url,
+    .token.entity,
+    .language-css .token.string,
+    .style .token.string {
+      color: var(--url);
+      background-color: var(--urlBg);
+    }
+
+    .token.atrule,
+    .token.attr-value {
+      color: var(--atrule);
+    }
+
+    .token.keyword {
+      color: var(--keyword);
+    }
+
+    .token.function {
+      color: var(--function);
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: var(--regex);
+    }
+
+    :not(pre) > code {
+      background: #f5f2f0;
+      padding: 2px 0;
+    }
+
+    html[data-theme="dark"] :not(pre) > code {
+      background-color: #2a2a2a;
+    }
+
+    :not(pre) > code[class*="language-"],
+    pre[class*="language-"] {
+      background: var(--prism-background);
+    }
+
+
+    @media print {
+      code[class*="language-"],
+      pre[class*="language-"] {
+        text-shadow: none;
+
       }
-      .toc-list {
-        overflow: hidden;
-        list-style: none;
+    }
+
+  </style>
+  <style>
+    div.code-toolbar {
+      position: relative
+    }
+
+    div.code-toolbar > .toolbar {
+      position: absolute;
+      z-index: 10;
+      top: .3em;
+      right: .2em;
+      transition: opacity .3s ease-in-out;
+      opacity: 0
+    }
+
+    div.code-toolbar:hover > .toolbar {
+      opacity: 1
+    }
+
+    div.code-toolbar:focus-within > .toolbar {
+      opacity: 1
+    }
+
+    div.code-toolbar > .toolbar > .toolbar-item {
+      display: inline-block
+    }
+
+    div.code-toolbar > .toolbar > .toolbar-item > a {
+      cursor: pointer
+    }
+
+    div.code-toolbar > .toolbar > .toolbar-item > button {
+      background: 0 0;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      line-height: normal;
+      overflow: visible;
+      padding: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none
+    }
+
+
+    div.code-toolbar > .toolbar > .toolbar-item > a:focus, div.code-toolbar > .toolbar > .toolbar-item > a:hover, div.code-toolbar > .toolbar > .toolbar-item > button:focus, div.code-toolbar > .toolbar > .toolbar-item > button:hover, div.code-toolbar > .toolbar > .toolbar-item > span:focus, div.code-toolbar > .toolbar > .toolbar-item > span:hover {
+      color: inherit;
+      text-decoration: none
+    }
+  </style>
+  <style>
+    .toc {
+      overflow-y: auto
+    }
+
+    .toc > .toc-list {
+      overflow: hidden;
+      position: relative
+    }
+
+    .toc > .toc-list li {
+      list-style: none
+    }
+
+    .toc-list {
+      margin: 0;
+      padding-left: 10px
+    }
+
+    a.toc-link {
+      color: currentColor;
+      height: 100%
+    }
+
+    .is-collapsible {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: all 300ms ease-in-out
+    }
+
+    .is-collapsed {
+      max-height: 0
+    }
+
+    .is-position-fixed {
+      position: fixed !important;
+      top: 0
+    }
+
+    .is-active-link {
+      font-weight: 700
+    }
+
+    .toc-link::before {
+      background-color: #EEE;
+      content: ' ';
+      display: inline-block;
+      height: inherit;
+      left: 0;
+      margin-top: -1px;
+      position: absolute;
+      width: 2px
+    }
+
+    .is-active-link::before {
+      background-color: #54BC4B
+    }
+  </style>
+
+
+  {{!-- This #block helper will try to preload page-specific assets --}}
+  {{{block "preload"}}}
+  <style>
+    .gh-content {
+      position: relative;
+    }
+
+    .gh-toc > .toc-list {
+      position: relative;
+      font-size: medium;
+    }
+
+    .toc-list {
+      overflow: hidden;
+      list-style: none;
+    }
+
+    @media (min-width: 1300px) {
+      .gh-sidebar {
+        position: absolute;
+        top: 12em;
+        bottom: 0;
+        margin-top: 6vmin;
+        left: -300px;
+        width: 400px;
+        grid-column-start: auto;
       }
-      @media (min-width: 1300px) {
-        .gh-sidebar {
-          position: absolute;
-          top: 12em;
-          bottom: 0;
-          margin-top: 6vmin;
-          left: -300px;
-          width: 400px;
-          grid-column-start: auto;
-        }
 
-        .gh-toc {
-          position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
-          top: 6vmin;
-        }
+      .gh-toc {
+        position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
+        top: 6vmin;
       }
-      .gh-toc .is-active-link::before {
-        background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
-      }
-      a.toc-link {
-        text-decoration: none;
-        font-size: medium;
-      }
-    </style>
+    }
 
-    {{!-- Styles & Scripts --}}
-    <style>
-      /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+    .gh-toc .is-active-link::before {
+      background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+    }
 
-      /* source-sans-pro-regular */
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local('SourceSansPro-Regular'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-regular.woff2'}}") format('woff2'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-regular.woff'}}") format('woff');
-      }
+    a.toc-link {
+      text-decoration: none;
+      font-size: medium;
+    }
+  </style>
 
-      /* source-sans-pro-600 */
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 600;
-        font-display: swap;
-        src: local('SourceSansPro-SemiBold'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-600.woff2'}}") format('woff2'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-600.woff'}}") format('woff');
-      }
+  {{!-- Styles & Scripts --}}
+  <style>
+    /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
 
-      /* source-sans-pro-700 */
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: local('SourceSansPro-Bold'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-700.woff2'}}") format('woff2'),
-            url("{{asset 'fonts/source-sans-pro/latin/source-sans-pro-700.woff'}}") format('woff');
-      }
+    /* source-sans-pro-regular */
+    @font-face {
+      font-family: 'Source Sans Pro';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: local('SourceSansPro-Regular'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-regular.woff2'}}) format('woff2'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-regular.woff'}}) format('woff');
+    }
 
-      /* iconmoon */
-      @font-face {
-        font-family: 'icomoon';
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-        src: url("{{asset 'fonts/icomoon/icomoon.eot?101fc3'}}");
-        src: url("{{asset 'fonts/icomoon/icomoon.eot?101fc3#iefix'}}") format('embedded-opentype'),
-        url("{{asset 'fonts/icomoon/icomoon.ttf?101fc3'}}") format('truetype'),
-        url("{{asset 'fonts/icomoon/icomoon.woff?101fc3'}}") format('woff'),
-        url("{{asset 'fonts/icomoon/icomoon.svg?101fc3#icomoon'}}") format('svg');
-      }
-    </style>
+    /* source-sans-pro-600 */
+    @font-face {
+      font-family: 'Source Sans Pro';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: local('SourceSansPro-SemiBold'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-600.woff2'}}) format('woff2'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-600.woff'}}) format('woff');
+    }
 
-    <link rel="stylesheet" type="text/css" href="{{asset "css/app.css"}}" media="screen" />
+    /* source-sans-pro-700 */
+    @font-face {
+      font-family: 'Source Sans Pro';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: local('SourceSansPro-Bold'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-700.woff2'}}) format('woff2'),
+      url({{asset 'fonts/source-sans-pro/latin/source-sans-pro-700.woff'}}) format('woff');
+    }
 
-    {{!-- This #block helper will inject a stylesheet for a specific page --}}
-    {{{block "styles"}}}
+  </style>
 
-    {{!-- This #block helper will pull data from the hero partial
-    to inject styles of the hero image to make it responsive --}}
-    {{{block "herobackground"}}}
+  <link rel="stylesheet" type="text/css" href="{{asset "css/app.css"}}" media="screen"/>
 
-    {{!-- This tag outputs SEO meta+structured data and other important settings --}}
-    {{ghost_head}}
+  {{!-- This #block helper will inject a stylesheet for a specific page --}}
+  {{{block "styles"}}}
 
-    {{!-- This style overrides the accent color to match the one from the Admin --}}
+  {{!-- This #block helper will pull data from the hero partial
+  to inject styles of the hero image to make it responsive --}}
+  {{{block "herobackground"}}}
+
+  {{!-- This tag outputs SEO meta+structured data and other important settings --}}
+  {{ghost_head}}
+
+  {{!-- This style overrides the accent color to match the one from the Admin --}}
+  <style>
+    :root {
+      --primary-subtle-color: var(--ghost-accent-color) !important;
+    }
+  </style>
+
+  {{!-- These variables are used to make the search form work --}}
+  <script>
+    // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+    const ghostHost = "{{@site.url}}"
+    // @license-end
+  </script>
+  <link rel="stylesheet" media="all" href="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.css">
+  <link rel="stylesheet" media="all" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+
+  {{#if @custom.enable_native_search}}
+    <script>
+      const nativeSearchEnabled = true
+    </script>
+  {{/if}}
+
+  {{#if @custom.search_api_key}}
+    <script>
+      const ghostSearchApiKey = "{{@custom.search_api_key}}"
+    </script>
+  {{/if}}
+
+  {{!-- This variable disbale the fade animation when it's enabled --}}
+  {{#if @custom.disable_fade_animation}}
     <style>
       :root {
-        --primary-subtle-color: var(--ghost-accent-color) !important;
+        --show-fade-animation: 0;
       }
     </style>
+  {{/if}}
 
-    {{!-- These variables are used to make the search form work --}}
-    <script>
-      // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
-      const ghostHost = "{{@site.url}}"
-      // @license-end
-    </script>
-    <link rel="stylesheet" media="all" href="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.css">
+  {{!-- This script sets the correct theme mode (light or dark) --}}
+  <script>
+    if (typeof Storage !== 'undefined') {
+      const currentSavedTheme = localStorage.getItem('theme')
 
-
-
-    {{#if @custom.enable_native_search}}
-      <script>
-        const nativeSearchEnabled = true
-      </script>
-    {{/if}}
-
-    {{#if @custom.search_api_key}}
-      <script>
-        const ghostSearchApiKey = "{{@custom.search_api_key}}"
-      </script>
-    {{/if}}
-
-    {{!-- This variable disbale the fade animation when it's enabled --}}
-    {{#if @custom.disable_fade_animation}}
-      <style>
-        :root {
-          --show-fade-animation: 0;
-        }
-      </style>
-    {{/if}}
-
-    {{!-- This script sets the correct theme mode (light or dark) --}}
-    <script>
-      if (typeof Storage !== 'undefined') {
-        const currentSavedTheme = localStorage.getItem('theme')
-
-        if (currentSavedTheme && currentSavedTheme === 'dark') {
-          document.documentElement.setAttribute('data-theme', 'dark')
-        } else {
-          document.documentElement.setAttribute('data-theme', 'light')
-        }
+      if (currentSavedTheme && currentSavedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light')
       }
-    </script>
-  </head>
-  <body class="{{body_class}} line-numbers ">
-    {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
-    {{{body}}}
+    }
+  </script>
+</head>
+<body class="{{body_class}} line-numbers ">
+{{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+{{{body}}}
 
-    {{!-- Search form --}}
-    {{^if @custom.enable_native_search}}
-      {{> search}}
-    {{/if}}
+{{!-- Search form --}}
+{{^if @custom.enable_native_search}}
+  {{> search}}
+{{/if}}
 
-    {{!-- The footer --}}
-    {{> footer}}
+{{!-- The footer --}}
+{{> footer}}
 
-    {{!-- Common scripts shared between pages --}}
-    <script defer src="{{asset "js/manifest.js"}}"></script>
-    <script defer src="{{asset "js/vendor.js"}}"></script>
-    <script defer src="{{asset "js/app.js"}}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.js"></script>
-    {{!-- The #block helper will pull in data from the #contentFor other template files --}}
-    {{{block "scripts"}}}
-    {{!-- Ghost outputs important scripts and data with this tag --}}
-    {{ghost_foot}}
-  </body>
+{{!-- Common scripts shared between pages --}}
+<script defer src="{{asset "js/manifest.js"}}"></script>
+<script defer src="{{asset "js/vendor.js"}}"></script>
+<script defer src="{{asset "js/app.js"}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Han/3.2.7/han.min.js"></script>
+{{!-- The #block helper will pull in data from the #contentFor other template files --}}
+{{{block "scripts"}}}
+{{!-- Ghost outputs important scripts and data with this tag --}}
+{{ghost_foot}}
+</body>
 </html>

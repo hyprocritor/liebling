@@ -34,12 +34,15 @@ This header template is shared across all the pages.
           <nav class="m-nav__left js-main-nav-left" role="navigation" aria-label="{{t "Main menu"}}">
             <ul>
               {{#if @site.logo}}
-                <li class="only-desktop">
+                <li class="only-desktop " style="display: inline">
                   <a href="{{@site.url}}" class="m-logo">
                     <img src="{{@site.logo}}" alt="{{@site.title}}" class="{{#if @custom.dark_mode_logo}}m-logo__image-light{{/if}}">
                     {{#if @custom.dark_mode_logo}}
                       <img src="{{@custom.dark_mode_logo}}" alt="{{@site.title}}" class="m-logo__image-dark">
                     {{/if}}
+                  </a>
+                  <a href="{{@site.url}}" class="m-site-name in-desktop-menu">
+                    {{@site.title}}
                   </a>
                 </li>
                 {{else}}

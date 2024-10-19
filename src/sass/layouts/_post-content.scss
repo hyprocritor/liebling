@@ -434,16 +434,22 @@
 
   :not(pre) > code,
   pre {
-    //background: #f5f2f0;
+
 
     //margin-bottom: 2em;
   }
 
   :not(pre) > code {
     padding: 0.1em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
     font-size: 1em;
     border-radius: 0.3em;
     white-space: normal;
+    background-color: #9b9b9b;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
 
   form {
@@ -516,8 +522,9 @@
     color: var(--primary-foreground-color);
     text-decoration: none !important;
     min-height: 148px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px,
-      rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+    //box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px,
+    //  rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     @include transition(opacity linear 0.2s);
   }

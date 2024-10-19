@@ -1,13 +1,15 @@
 .m-logo {
   display: inline-block;
   height: 32px;
+  color: #ebffff;
 
   img {
     width: auto;
     max-width: 150px;
     height: 100%;
     object-fit: contain;
-
+  //  box-shadow: 3px 2px 1px rgba(0,0,0,0.3), 0 3px 15px #fff, 0 0 10px #38eeff, 0 0 50px #38eeff;
+    border-radius: 7px;
     &.m-logo__image-light {
       display: var(--toggle-darkmode-button-display-moon);
     }

@@ -1,169 +1,128 @@
-/* PrismJS - used for code highlighting */
 
-[class*="language-"] ::selection {
-  color: #000;
-  text-shadow: none;
+.l-post-content pre[class*='language-'] {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-.token.important,
-.token.bold {
-  font-weight: bold;
+.l-post-content .toolbar {
+  display: flex;
+  flex-direction: row-reverse;
 }
-.token.italic {
-  font-style: italic;
+
+.l-post-content code[class*='language-']::-moz-selection,
+.l-post-content pre[class*='language-']::-moz-selection,
+.l-post-content code[class*='language-'] ::-moz-selection,
+.l-post-content pre[class*='language-'] ::-moz-selection {
+  background: #cceae7;
+  color: #263238;
 }
-.token.entity {
-  cursor: help;
+
+.l-post-content code[class*='language-']::selection,
+.l-post-content pre[class*='language-']::selection,
+.l-post-content code[class*='language-'] ::selection,
+.l-post-content pre[class*='language-'] ::selection {
+  background: #cceae7;
+  color: #263238;
 }
-.namespace {
+
+.l-post-content :not(pre) > code[class*='language-'] {
+  white-space: normal;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+}
+
+.l-post-content pre[class*='language-'] {
+  overflow: auto;
+  position: relative;
+  margin: 0.5rem 0;
+  padding: 2.725rem 1rem 1.25rem 3.8rem;
+}
+
+.l-post-content .code-toolbar .toolbar {
+  background-color: #9ed0ff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 1.725rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.l-post-content .code-toolbar .toolbar .toolbar-item .show-language i.fas {
+  margin-right: 0.5rem;
+}
+
+.l-post-content .code-toolbar .toolbar .toolbar-item .select-code:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+html[data-theme="dark"] .l-post-content :not(pre) > code[class*='language-'] {
+  white-space: normal;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+}
+
+html[data-theme="dark"] .l-post-content .language-css > code,
+html[data-theme="dark"] .l-post-content .language-sass > code,
+html[data-theme="dark"] .l-post-content .language-scss > code {
+  color: #fd9170;
+}
+
+html[data-theme="dark"] .l-post-content [class*='language-'] .namespace {
   opacity: 0.7;
 }
 
-/* Default colors (Light mode) */
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  --color: #33a;
-  --textShadow: #fff;
-  --comment: #6e6e6e;
-  --punctuation: #4e4e4e;
-  --property: #905;
-  --operator: #70b;
-  --selector: #487b00;
-  --url: #8d6640;
-  --urlBg: hsla(0, 0%, 100%, .5);
-  --boolean: #905;
-  --atrule: #0075a8;
-  --keyword: #0075a8;
-  --function: #c93654;
-  --regex: #860;
-  --boxShadow: hsla(0,0%,0%,.3);
-  --prism-background: #f5f2f0;
-
+html[data-theme="dark"] .l-post-content .code-toolbar .toolbar {
+  background-color: #171717;
+  border-bottom: 1px solid #000;
 }
 
+html[data-theme="dark"] .l-post-content .code-toolbar .toolbar .toolbar-item .show-language {
+  color: #c9d1d9;
+  background-color: transparent;
+}
 
-/* If the OS has dark mode set then... */
-/* Change dark to light to test */
+html[data-theme="dark"] .l-post-content .code-toolbar .toolbar .toolbar-item .select-code {
+  color: #c9d1d9;
+  background-color: transparent;
+}
 
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) code[class*="language-"]:not([contenteditable]),
-  html:not([data-theme="light"]) pre[class*="language-"] {
-    --color: #6ae;
-    --textShadow: #000;
-    --comment: #9ab;
-    --punctuation: #999;
-    --property: #e70;
-    --operator: #d7f;
-    --selector: #8b2;
-    --url: #cde;
-    --urlBg: rgba(0,0,0,.5);
-    --boolean: #a8f;
-    --atrule: #f00;
-    --keyword: #f00;
-    --function: #f55;
-    --regex: #f91;
+html[data-theme="dark"] .l-post-content .code-toolbar .toolbar .toolbar-item .select-code:hover {
+  color: rgba(201, 209, 207, 0.5);
+}
 
-    --boxShadow: #000;
-    --prism-background: #f5f2f0;
-  }
+.pre-block-loading {
+  @apply absolute top-0 left-0 w-full h-full z-10 bg-white dark:bg-black;
+}
+
+.pre-block-loading .loading-text {
+  @apply mt-0.5 text-base text-black dark:text-white;
 }
 
 
-/* Manual switch mode - where implemented */
-html[data-theme="dark"] code[class*="language-"]:not([contenteditable]),
-html[data-theme="dark"] pre[class*="language-"] {
-
-  /* Exactly the same as prefers-color-scheme: dark */
-  --color: #6ae;
-  --textShadow: #000;
-  --comment: #9ab;
-  --punctuation: #999;
-  --property: #e70;
-  --operator: #d7f;
-  --selector: #8b2;
-  --url: #cde;
-  --urlBg: rgba(0,0,0,.5);
-  --boolean: #8af;
-  --atrule: #ffb;
-  --keyword: #fe6;
-  --function: #f55;
-  --regex: #f91;
-  --prism-background: #2a2a2a;
-  --boxShadow: #000;
-
+div.code-toolbar > .toolbar > .toolbar-item span {
+  color: #2a2a2a;
+  padding: 0 .5em;
+  font-size: 1rem;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: var(--comment);
-}
-.token.punctuation {
-  color: var(--punctuation);
-}
-.token.property,
-.token.symbol,
-.token.tag,
-.token.constant,
-.token.deleted {
-  color: var(--property);
-}
-.token.boolean,
-.token.number {
-  color: var(--boolean);
-}
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: var(--selector);
-}
-.token.operator {
-  color: var(--operator);
-}
-.token.url,
-.token.entity,
-.language-css .token.string,
-.style .token.string {
-  color: var(--url);
-  background-color: var(--urlBg);
-}
-.token.atrule,
-.token.attr-value {
-  color: var(--atrule);
-}
-.token.keyword {
-  color: var(--keyword);
-}
-.token.function {
-  color: var(--function);
-}
-.token.regex,
-.token.important,
-.token.variable {
-  color: var(--regex);
-}
-:not(pre) > code {
-  background: #f5f2f0;
-  padding: 2px 0;
-}
-html[data-theme="dark"] :not(pre) > code {
-  background-color: #2a2a2a;
+div.code-toolbar > .toolbar > .toolbar-item > span:before {
+  content: "\f121";
+  font-family: "FontAwesome";
+  padding-right: 5px;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: var(--prism-background);
+html[data-theme="dark"] div.code-toolbar > .toolbar > .toolbar-item span {
+  color: #fff;
+  padding: 0 .5em;
+  font-size: 1rem;
 }
 
-
-@media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
-    text-shadow: none;
-
-  }
+div.code-toolbar > .toolbar > .toolbar-item > button > span:before {
+  content: "\f0c5";
+  font-family: "FontAwesome";
+  padding-right: 5px;
 }

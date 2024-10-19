@@ -27,7 +27,7 @@
 }
 
 [data-theme="dark"] {
-  --background-color: #111;
+  --background-color: rgba(30,41,59,1);
   --lighter-backgound-color: #b4b4b4;
   --primary-foreground-color: #ccc;
   --secondary-foreground-color: #fff;
@@ -36,7 +36,7 @@
   --titles-color: #b4b4b4;
   --link-color: #b6b7f6;
   --primary-border-color: #1d1d1d;
-  --secondary-border-color: #0f0f0f;
+  --secondary-border-color: rgba(22, 31, 44, 0.2);
   --article-shadow-normal: 0 4px 5px 5px rgba(0, 0, 0, 0.1);
   --article-shadow-hover: 0 4px 5px 10px rgba(0, 0, 0, 0.1);
   --transparent-background-color: rgba(0, 0, 0, 0.99);

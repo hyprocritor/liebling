@@ -12,7 +12,7 @@ This template is used for the post page.
 {{#contentFor "styles"}}
   <link rel="stylesheet" type="text/css" href="{{asset "css/post.css"}}" media="screen"/>
   {{#if @custom.enable_artalk}}
-  <link href="{{@custom.artalk_backend}}/dist/Artalk.css" rel="stylesheet"/>
+    <link href="{{@custom.artalk_backend}}/dist/Artalk.css" rel="stylesheet"/>
   {{/if}}
 {{/contentFor}}
 
@@ -231,7 +231,7 @@ into the {body} of the default.hbs template --}}
   <script defer src="{{asset "js/post.js"}}"></script>
   {{#if @custom.enable_artalk}}
     <script src="{{@custom.artalk_backend}}/dist/Artalk.js"></script>
-    <script defer >
+    <script defer>
       let artalk = Artalk.init({
         el: '#Comments',                       // 绑定元素的 Selector
         pageKey: location.pathname,                         // 固定链接
@@ -259,6 +259,9 @@ into the {body} of the default.hbs template --}}
     src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"
     integrity="sha512-/kVH1uXuObC0iYgxxCKY41JdWOkKOxorFVmip+YVifKsJ4Au/87EisD1wty7vxN2kAhnWh6Yc8o/dSAXj6Oz7A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/show-language/prism-show-language.min.js"
+          integrity="sha512-d1t+YumgzdIHUL78me4B9NzNTu9Lcj6RdGVbdiFDlxRV9JTN9s+iBQRhUqLRq5xtWUp1AD+cW2sN2OlST716fw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     tocbot.init({
       // Where to render the table of contents.
