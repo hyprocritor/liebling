@@ -373,6 +373,7 @@
         top: 12em;
         bottom: 0;
         margin-top: 6vmin;
+        padding-left: 5rem;
         left: -300px;
         width: 400px;
         grid-column-start: auto;
@@ -380,7 +381,7 @@
 
       .gh-toc {
         position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
-        top: 6vmin;
+        top: 7vmin;
       }
     }
 
@@ -497,7 +498,8 @@
     }
   </script>
 </head>
-<body class="{{body_class}} line-numbers ">
+<body class="{{body_class}} line-numbers " data-prismjs-copy="{{t "Copy Code"}}" 		data-prismjs-copy-error="{{t "Press Ctrl + C to Copy"}}"
+      data-prismjs-copy-success="{{t "Copied"}}">
 {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
 {{{body}}}
 
